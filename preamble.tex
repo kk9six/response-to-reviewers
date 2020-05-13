@@ -1,0 +1,169 @@
+\usepackage[includeheadfoot,top=10mm, bottom=10mm, footskip=1cm,left=20mm,right=20mm, paperheight=27.94cm, paperwidth=21.59cm]{geometry}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\definecolor{colorcomment}{rgb}{1.0, 0.44, 0.37}
+\definecolor{colorreply}{rgb}{0.13, 0.67, 0.8}
+
+\definecolor{addcolor}{rgb}{0., 0., 1}
+\definecolor{delcolor}{rgb}{1., 0., 0.}
+
+\definecolor{newblue}{rgb}{.09, 0.569, 1}
+\definecolor{newred}{rgb}{1.0, 0.44, 0.37}
+
+\definecolor{linktextcolor}{RGB}{0, 21, 115}
+
+\usepackage[colorlinks,allcolors=linktextcolor]{hyperref}
+\usepackage{prettyref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{subrefformat=parens}
+\usepackage{nicefrac}
+\usepackage{xparse}
+\usepackage{soul}
+\usepackage[authormarkup=none, commentmarkup=footnote]{changes}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[explicit]{titlesec}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage{adjustbox} % center large tables across textwidth by surrounding tabular with \begin{adjustbox}{center}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[framemethod=default]{mdframed}
+\usepackage{xstring}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt}
+
+% soul
+\setul{3pt}{1pt}
+\setulcolor{blue}
+
+% add / delete
+\definechangesauthor[color=addcolor]{add}
+\definechangesauthor[color=delcolor]{del}
+\NewDocumentCommand{\add}{ O{add} m}{\added[id=#1]{#2}}
+\NewDocumentCommand{\del}{ O{del} m}{\deleted[id=#1]{#2}}
+
+
+% section
+\titleformat{\section}[runin]{\bfseries\scshape\large}{#1}{1em}{}
+% section*
+\titleformat{name=\section,numberless}[runin]{\bfseries\scshape\large}{#1}{1em}{}
+% subsection
+\titleformat{\subsection}[runin]{\bfseries\scshape}{Comment \# \thesubsection\quad#1\label{cmt:\thesubsection}}{1em}{}{}
+% subsubsection
+\titleformat{\subsubsection}[runin]{\bfseries}{#1\quad\footnotesize\# \thesubsubsection\label{cmt:\thesubsubsection}}{1em}{}
+
+\titlespacing{\section}{0em}{1em}{1em} % left before after
+\titlespacing{\subsection}{0em}{1em}{1.5em} % left before after
+\titlespacing{\subsubsection}{0em}{0em}{1em} % left before after
+
+% Paragraph styles
+\setlength{\parskip}{0.6\baselineskip}
+\setlength{\parindent}{0pt}
+
+% Table styles
+\let\oldtabular=\tabular
+\let\endoldtabular=\endtabular
+\renewenvironment{tabular}[1]{\begin{adjustbox}{center}\begin{oldtabular}{#1}}{\end{oldtabular}\end{adjustbox}}
+
+\global\mdfdefinestyle{commentstyle}{
+     linecolor=colorcomment,linewidth=0.05cm,
+     leftmargin=-0.5cm,rightmargin=-0.5cm, innerleftmargin=0.4cm,innerrightmargin=0.4cm,
+     backgroundcolor=red!2,
+     topline=false,bottomline=false%,rightline=false
+}
+\global\mdfdefinestyle{responsestyle}{
+     linecolor=colorreply,linewidth=0.05cm,
+     leftmargin=-0.5cm,rightmargin=-0.5cm, innerleftmargin=0.4cm,innerrightmargin=0.4cm,
+    %  backgroundcolor=blue!1,
+     topline=false,bottomline=false%,rightline=false
+}
+\global\mdfdefinestyle{quotestyle}{
+     linecolor=gray!15,linewidth=0.00cm,backgroundcolor=gray!15,
+    %  leftmargin=0.5cm,rightmargin=0.5cm,
+     leftmargin=-0.5cm,rightmargin=-0.5cm,
+     innerleftmargin=0.4cm,innerrightmargin=0.4cm,
+     innertopmargin=1em,
+     innerbottommargin=0.4cm,
+}
+
+\newcounter{aecounter}
+\NewDocumentEnvironment{aecomment}{ +b }
+{
+    \addtocounter{aecounter}{1}
+    \begin{mdframed}[style=commentstyle]
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Comment \# \arabic{aecounter}} \textbf{Comment\quad \footnotesize{\# \arabic{aecounter}}}\hfill
+
+    #1
+    }{\end{mdframed}}
+
+\NewDocumentEnvironment{revcomment}{s O{3} +b }
+{
+    \titleformat{\subsection}[runin]{\bfseries}{Comment\quad\footnotesize\# \thesubsection\label{cmt:\thesubsection}}{1em}{}{}
+    \titleformat{\subsubsection}[runin]{\bfseries}{Comment\quad\footnotesize\# \thesubsubsection\label{cmt:\thesubsubsection}}{1em}{}
+    \titlespacing{\subsection}{0em}{0em}{1em} % left before after
+    \titlespacing{\subsubsection}{0em}{0em}{1em} % left before after
+
+    \begin{mdframed}[style=commentstyle]
+    \IfBooleanTF{#1}{\textbf{Comment}}
+    {\IfStrEqCase{#2}{
+        {2}{\subsection{}\hfill}
+        {3}{\subsubsection{}\hfill}}}
+
+    #3
+}
+{
+    \end{mdframed}
+}
+
+\NewDocumentEnvironment{response}{s +b }
+{
+    \begin{mdframed}[style=responsestyle]
+
+    \IfBooleanTF{#1}{}{\textbf{Response}}
+
+    #2
+}
+{
+    \end{mdframed}
+}
+
+\RenewDocumentEnvironment{quote}{O{} +b }
+{
+    \begin{mdframed}[style=quotestyle]
+    #2
+
+    %page, section, column, paragraph, line
+    \hfill\textbf{\small{#1}}
+}
+{
+    \end{mdframed}
+}
+
+
+\NewDocumentCommand{\rev}{ m }{\section{Reviewer #1}\label{rev:#1}}
+\NewDocumentCommand{\commentclass}{ m }{\subsection{#1}\label{cmt:#1}}
+
+\usepackage{tocloft}
+% \renewcommand{\cftsecpresnum}{\begin{lrbox}{\@temp}}
+% \renewcommand{\cftsecaftersnum}{\end{lrbox}}
+\renewcommand{\cftsecpresnum}{\textcolor{white}}
+\renewcommand{\cftsecaftersnum}{}
+\setlength{\cftsecnumwidth}{0pt}
+
+\renewcommand{\cftsecfont}{\bfseries\scshape\large}
+\renewcommand{\cftsubsecpresnum}{Comment \# }
+\renewcommand{\cftdotsep}{1}
+\setlength\cftbeforesecskip{2em}
+\setlength\cftbeforesubsecskip{0.5em}
+\setlength{\cftsubsecnumwidth}{7em}
+
+\input{macros.tex}

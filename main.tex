@@ -1,0 +1,31 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{lipsum}
+\input{preamble.tex}
+
+\begin{document}
+
+{\Large\bf Response to Reviewers}\\[1em]
+\hrule
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\label{toc}
+\clearpage
+
+\input{AE.tex}
+\clearpage
+\input{rev_1.tex}
+% \clearpage
+\rev{2}
+\begin{revcomment}[2]
+\end{revcomment}
+\begin{revcomment}[2]
+\end{revcomment}
+\begin{revcomment}[2]
+\end{revcomment}
+% \clearpage
+\rev{3}
+
+\end{document}

@@ -1,0 +1,123 @@
+% theorem
+\newtheorem{defn}{Definition}
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{thm}[defn]{Theorem}
+
+% expectation, probability
+\newcommand{\E}[1]{\mathbb{E}[#1]}
+\def\prob{\mathbb{P}}
+
+% {{{ parentheses by Moses}}}
+% various bracket-like commands
+% round parentheses
+\newcommand{\paren}[1]{(#1)}
+\newcommand{\Paren}[1]{\left(#1\right)}
+\newcommand{\bigparen}[1]{\big(#1\big)}
+\newcommand{\Bigparen}[1]{\Big(#1\Big)}
+% square brackets
+\newcommand{\brac}[1]{[#1]}
+\newcommand{\Brac}[1]{\left[#1\right]}
+\newcommand{\bigbrac}[1]{\big[#1\big]}
+\newcommand{\Bigbrac}[1]{\Big[#1\Big]}
+% absolute value
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\Abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\bigabs}[1]{\big\lvert#1\big\rvert}
+\newcommand{\Bigabs}[1]{\Big\lvert#1\Big\rvert}
+\newcommand{\icost}{\mathsf{icost}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+% cardinality
+\newcommand{\card}[1]{\lvert#1\rvert}
+\newcommand{\Card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\bigcard}[1]{\big\lvert#1\big\rvert}
+\newcommand{\Bigcard}[1]{\Big\lvert#1\Big\rvert}
+% set
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\Set}[1]{\left\{#1\right\}}
+\newcommand{\bigset}[1]{\big\{#1\big\}}
+\newcommand{\Bigset}[1]{\Big\{#1\Big\}}
+% norm
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\Norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\bignorm}[1]{\big\lVert#1\big\rVert}
+\newcommand{\Bignorm}[1]{\Big\lVert#1\Big\rVert}
+% 2-norm
+\newcommand{\normt}[1]{\norm{#1}_2}
+\newcommand{\Normt}[1]{\Norm{#1}_2}
+\newcommand{\bignormt}[1]{\bignorm{#1}_2}
+\newcommand{\Bignormt}[1]{\Bignorm{#1}_2}
+% 2-norm squared
+\newcommand{\snormt}[1]{\norm{#1}^2_2}
+\newcommand{\Snormt}[1]{\Norm{#1}^2_2}
+\newcommand{\bigsnormt}[1]{\bignorm{#1}^2_2}
+\newcommand{\Bigsnormt}[1]{\Bignorm{#1}^2_2}
+% norm squared
+\newcommand{\snorm}[1]{\norm{#1}^2}
+\newcommand{\Snorm}[1]{\Norm{#1}^2}
+\newcommand{\bigsnorm}[1]{\bignorm{#1}^2}
+\newcommand{\Bigsnorm}[1]{\Bignorm{#1}^2}
+% 1-norm
+\newcommand{\normo}[1]{\norm{#1}_1}
+\newcommand{\Normo}[1]{\Norm{#1}_1}
+\newcommand{\bignormo}[1]{\bignorm{#1}_1}
+\newcommand{\Bignormo}[1]{\Bignorm{#1}_1}
+% infty-norm
+\newcommand{\normi}[1]{\norm{#1}_\infty}
+\newcommand{\Normi}[1]{\Norm{#1}_\infty}
+\newcommand{\bignormi}[1]{\bignorm{#1}_\infty}
+\newcommand{\Bignormi}[1]{\Bignorm{#1}_\infty}
+% inner product
+\newcommand{\iprod}[1]{\langle#1\rangle}
+\newcommand{\Iprod}[1]{\left\langle#1\right\rangle}
+\newcommand{\bigiprod}[1]{\big\langle#1\big\rangle}
+\newcommand{\Bigiprod}[1]{\Big\langle#1\Big\rangle}
+
+%% math
+\def\map{\rightarrow}
+%abbreviation
+\def\eps{\epsilon}
+
+\def\mbegin{m_{\mathrm{begin}}}
+\def\mneed{m_{\mathrm{need}}}
+\def\mrest{m_{\mathrm{rest}}}
+\def\maxangle{\theta_{\max}}
+
+\newcommand{\Rd}{\mathbb{R}^d}
+\newcommand{\round}[1]{\mathrm{round}(#1)}
+\newcommand{\ball}[1]{B_{q}(r_{#1})}
+\newcommand{\num}[1]{\lvert#1\rvert}
+\def\half{\nicefrac12}
+
+% equation for epsilon
+\newcommand{\eqeps}[1]{\abs{\hat{#1} - #1}}
+
+% alphabet
+%cal
+\def\cA{\mathcal{A}}
+\def\cB{\mathcal{B}}
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cG{\mathcal{G}}
+\def\cH{\mathcal{H}}
+\def\cI{\mathcal{I}}
+\def\cK{\mathcal{K}}
+\def\cP{\mathcal{P}}
+\def\cS{\mathcal{S}}
+%bb
+\def\bbR{\mathbb{R}}
+
+\newcommand{\flatfrac}[2]{#1/#2}
+\let\nfrac=\nicefrac
+\let\ffrac=\flatfrac
+
+% prettyref
+\newcommand{\pref}[1]{\prettyref{#1}}
+\newrefformat{sec}{Section~\ref{#1}}
+\newrefformat{apx}{Appendix~\ref{#1}}
+\newrefformat{lem}{Lemma~\ref{#1}}
+\newrefformat{fig}{Figure~\ref{#1}}
+\newrefformat{alg}{Algorithm~\ref{#1}}
+\newrefformat{rev}{\hyperref[#1]{Reviewer~\getrefnumber{#1}}}
+\newrefformat{cmt}{\hyperref[#1]{Comment~\getrefnumber{#1}}}
